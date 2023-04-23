@@ -1,0 +1,8 @@
+# Write a dcoker file to build a container for rhel 8 with java 11 and expose port 6200 and loads my local directory /cotntainerized-overlay into /app
+FROM registry.access.redhat.com/ubi8/ubi
+RUN yum install -y java-11-openjdk-devel
+WORKDIR /app
+CMD java -version
+EXPOSE 6200
+COPY /containerized-overlay /app
+
