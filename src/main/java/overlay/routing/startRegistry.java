@@ -1,9 +1,7 @@
-package overlay.main_helpers;
+package overlay.routing;
 
 import java.util.Scanner;
 import java.util.ArrayList;
-
-import overlay.routing.Registry;
 
 public class startRegistry {
 
