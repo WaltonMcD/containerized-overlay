@@ -11,6 +11,9 @@ public class startRegistry {
     Boolean setupComplete = false;
     String command = "";
 
+    Registry registry = null;
+    Thread registryThread = null;
+
     public startRegistry(Integer serverPort, Integer numOfConnections){
         this.serverPort = serverPort;
         this.numOfConnections = numOfConnections;
@@ -27,7 +30,7 @@ public class startRegistry {
         System.out.println("\nWelcome to the Overlay!");
         System.out.println("Possible commands include:\n- setup-overlay\n- exit-overlay\n- list-messaging-nodes\n- start");
 
-        while(! command.equals("exit-overlay")) {
+        while(!command.equals("exit-overlay")) {
             System.out.print("\nEnter a command: ");
             command = input.nextLine().trim().toLowerCase();
             System.out.println("\nCommand Entered: " + command);
@@ -37,12 +40,13 @@ public class startRegistry {
             }
             else if(command.equals("exit-overlay")) {
                 System.out.println("Exiting... ");
+                input.close();
             }
             else if(command.equals("setup-overlay")) {
                 if(! setupComplete) {
                     System.out.println("Starting Overlay... ");
-                    Registry registry = new Registry(serverPort, numOfConnections);
-                    Thread registryThread = new Thread(registry);
+                    registry = new Registry(serverPort, numOfConnections);
+                    registryThread = new Thread(registry);
                     registryThread.start();
                     setupComplete = true;
                     System.out.println("Overlay setup complete... \nWaiting for start directive...");
@@ -76,9 +80,6 @@ public class startRegistry {
                 }
             }
         }
-
-        // Clean Up
-        input.close();
     }
     
 }

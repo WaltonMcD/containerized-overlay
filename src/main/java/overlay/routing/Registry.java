@@ -43,8 +43,12 @@ public class Registry extends Thread {
             }
             
         } catch (IOException ioe) {
-            // TODO: handle exception
+            System.out.println("Error Registry: " + ioe.getMessage());
         }
+    }
+
+    public void setComplete(Boolean complete) {
+        this.complete = complete;
     }
 }
     
