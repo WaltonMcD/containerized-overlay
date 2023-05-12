@@ -39,8 +39,12 @@ public class startRegistry {
                 System.out.println("Command not found... ");
             }
             else if(command.equals("exit-overlay")) {
-                System.out.println("Exiting... ");
+                if(registryThread.isAlive()){
+                    registry.setComplete(true);
+                    registryThread.interrupt();
+                }
                 input.close();
+                System.out.println("Exiting... ");
             }
             else if(command.equals("setup-overlay")) {
                 if(! setupComplete) {

@@ -8,6 +8,9 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.net.Socket;
 
+// Custom Classes
+import overlay.routing.*;
+
 public class startNode {
 
     Scanner input = new Scanner(System.in);
@@ -24,16 +27,15 @@ public class startNode {
     public void startNewNode(){
         try {
             sock = new Socket(serverAddress, serverPort);
-            //Node node = new Node(sock);
-            //Thread thread = new Thread(node);
-            //thread.start();
+            Node node = new Node(sock);
+            Thread thread = new Thread(node);
+            thread.start();
 
             while(!command.equals("exit-overlay")){
                 command = input.next();
             }
             
             input.close();
-            //thread.interrupt();
             sock.close();
         } 
         catch (UnknownHostException un) {
