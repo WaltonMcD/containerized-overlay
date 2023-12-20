@@ -3,6 +3,7 @@ package overlay.routing;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Registry extends Thread {
     
@@ -11,12 +12,14 @@ public class Registry extends Thread {
     Integer port;
     Integer numConnections;
     Boolean complete;
+    ArrayList<Socket> nodeArray;
     
-    public Registry(Integer port, Integer numConnections) {
+    public Registry(Integer port, Integer numConnections, ArrayList<Socket> nodeArray) {
         try {
             serverSocket = new ServerSocket(port);
             this.numConnections = numConnections;
             this.complete = false;
+            this.nodeArray = nodeArray;
 
         } catch (IOException ioe) {
             System.out.println("Error Registry: " + ioe.getMessage());
@@ -29,6 +32,7 @@ public class Registry extends Thread {
         try {
             while(!complete){
                 Socket incomingConnectionSocket = this.serverSocket.accept();
+                nodeArray.add(incomingConnectionSocket);
                 if (Thread.currentThread().isInterrupted()) {
                     System.out.println(Thread.currentThread().getName() + " detected interruption, exiting...");
                     incomingConnectionSocket.close();

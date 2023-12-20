@@ -13,7 +13,6 @@ import overlay.routing.*;
 
 public class startNode {
 
-    Scanner input = new Scanner(System.in);
     String serverAddress = "";
     Integer serverPort = 0;
     String command = "";
@@ -31,12 +30,7 @@ public class startNode {
             Thread thread = new Thread(node);
             thread.start();
 
-            while(!command.equals("exit-overlay")){
-                command = input.next();
-            }
-            
-            input.close();
-            sock.close();
+            while(true){}
         } 
         catch (UnknownHostException un) {
             System.out.println("Error Node: " + un.getMessage());

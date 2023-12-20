@@ -2,6 +2,7 @@ package overlay.routing;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.net.Socket;
 
 public class startRegistry {
 
@@ -22,6 +23,7 @@ public class startRegistry {
     public void startNewRegistry(){
         // Error check command entries
         ArrayList<String> possibleCommands = new ArrayList<String>();
+        ArrayList<Socket> nodeArray = new ArrayList<Socket>();
         possibleCommands.add("setup-overlay");
         possibleCommands.add("exit-overlay");
         possibleCommands.add("list-messaging-nodes"); 
@@ -49,7 +51,7 @@ public class startRegistry {
             else if(command.equals("setup-overlay")) {
                 if(! setupComplete) {
                     System.out.println("Starting Overlay... ");
-                    registry = new Registry(serverPort, numOfConnections);
+                    registry = new Registry(serverPort, numOfConnections, nodeArray);
                     registryThread = new Thread(registry);
                     registryThread.start();
                     setupComplete = true;
@@ -62,6 +64,9 @@ public class startRegistry {
             else if(command.equals("list-messaging-nodes")) {
                 if(setupComplete){
                     System.out.println("Message Nodes: ");
+                    for(Socket node: nodeArray){
+                        System.out.println(node);
+                    }
                 }
                 else{
                     System.out.println("Please setup the overlay first. Skipping... "); 
