@@ -2,9 +2,10 @@ package overlay.routing;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.net.Socket;
 
-public class startRegistry {
+public class RegistryController {
 
     Scanner input = new Scanner(System.in);
     Integer serverPort = 0;
@@ -15,19 +16,22 @@ public class startRegistry {
     Registry registry = null;
     Thread registryThread = null;
 
-    public startRegistry(Integer serverPort, Integer numOfConnections){
+    public RegistryController(Integer serverPort, Integer numOfConnections){
         this.serverPort = serverPort;
         this.numOfConnections = numOfConnections;
     }
 
     public void startNewRegistry(){
-        // Error check command entries
-        ArrayList<String> possibleCommands = new ArrayList<String>();
+        // List of connected nodes
         ArrayList<Socket> nodeArray = new ArrayList<Socket>();
-        possibleCommands.add("setup-overlay");
-        possibleCommands.add("exit-overlay");
-        possibleCommands.add("list-messaging-nodes"); 
-        possibleCommands.add("start");
+        // List of available commands
+        ArrayList<String> possibleCommands = new ArrayList<String>(
+            Arrays.asList("setup-overlay",
+                          "exit-overlay",
+                          "list-messaging-nodes",
+                          "start"
+                          )
+        );
 
         System.out.println("\nWelcome to the Overlay!");
         System.out.println("Possible commands include:\n- setup-overlay\n- exit-overlay\n- list-messaging-nodes\n- start");

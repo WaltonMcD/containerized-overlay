@@ -9,7 +9,7 @@ public class Main{
             Integer serverPort = Integer.parseInt(args[1]);
             Integer numOfConnections = Integer.parseInt(args[2]);
 
-            startRegistry registry = new startRegistry(serverPort, numOfConnections);
+            RegistryController registry = new RegistryController(serverPort, numOfConnections);
             registry.startNewRegistry();
              
         }
@@ -18,7 +18,7 @@ public class Main{
             String serverAddress = args[2];
             
 
-            startNode node = new startNode(serverAddress, serverPort);
+            NodeController node = new NodeController(serverAddress, serverPort);
             node.startNewNode();
             
 

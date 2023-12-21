@@ -5,20 +5,19 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 // Standard Classes
-import java.util.Scanner;
 import java.net.Socket;
 
 // Custom Classes
 import overlay.routing.*;
 
-public class startNode {
+public class NodeController {
 
     String serverAddress = "";
     Integer serverPort = 0;
     String command = "";
     Socket sock = null;
 
-    public startNode(String serverAddress, Integer serverPort){
+    public NodeController(String serverAddress, Integer serverPort){
         this.serverAddress = serverAddress;
         this.serverPort = serverPort;
     }
